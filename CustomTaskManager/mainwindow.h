@@ -18,6 +18,10 @@ public:
 
 public slots:
     void realtimeDataSlot();
+    void resourcesChart();
+    void batteryChargeChart();
+    void batteryDischargeChart();
+    void processesChart();
 
 private:
     Ui::MainWindow *ui;

@@ -6,7 +6,24 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    resourcesChart();
+    batteryChargeChart();
 
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::batteryChargeChart(){
+    ui->widget->addGraph();
+    ui->widget->graph(0)->setPen(QPen(QColor(40, 110, 255)));
+    ui->widget->addGraph();
+    ui->widget->graph(1)->setPen(QPen(QColor(255, 110, 40)));
+}
+
+void MainWindow::resourcesChart(){
     ui->widget->addGraph(); // blue line
     ui->widget->graph(0)->setPen(QPen(QColor(40, 110, 255)));
     ui->widget->addGraph(); // red line
@@ -25,12 +42,6 @@ MainWindow::MainWindow(QWidget *parent) :
     // setup a timer that repeatedly calls MainWindow::realtimeDataSlot:
     connect(&dataTimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot()));
     dataTimer.start(0); // Interval 0 means to refresh as fast as possible
-
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
 }
 
 void MainWindow::realtimeDataSlot(){
