@@ -14,12 +14,15 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QToolBar>
@@ -38,18 +41,23 @@ public:
     QTabWidget *tabWidget;
     QWidget *processos;
     QHBoxLayout *horizontalLayout_3;
-    QHBoxLayout *horizontalLayout_4;
-    QVBoxLayout *verticalLayout_6;
+    QVBoxLayout *verticalLayout_3;
     QLabel *label;
+    QHBoxLayout *horizontalLayout_2;
     QLabel *label_2;
+    QPlainTextEdit *plainTextEdit;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
     QComboBox *comboBox;
-    QHBoxLayout *horizontalLayout_5;
+    QSpacerItem *verticalSpacer;
     QCustomPlot *widget_2;
     QWidget *recursos;
     QVBoxLayout *verticalLayout;
+    QGroupBox *groupBox;
     QCustomPlot *widget;
+    QWidget *widget_3;
+    QGroupBox *groupBox_2;
+    QCustomPlot *widget_4;
     QWidget *energia;
     QCustomPlot *charge;
     QCustomPlot *discharge;
@@ -80,60 +88,60 @@ public:
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setSpacing(6);
-        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
-        verticalLayout_6 = new QVBoxLayout();
-        verticalLayout_6->setSpacing(6);
-        verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         label = new QLabel(processos);
         label->setObjectName(QStringLiteral("label"));
-        label->setMaximumSize(QSize(150, 150));
         QFont font;
         font.setBold(true);
         font.setWeight(75);
         label->setFont(font);
-        label->setAlignment(Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing);
-        label->setMargin(0);
 
-        verticalLayout_6->addWidget(label, 0, Qt::AlignHCenter);
+        verticalLayout_3->addWidget(label, 0, Qt::AlignHCenter);
 
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         label_2 = new QLabel(processos);
         label_2->setObjectName(QStringLiteral("label_2"));
 
-        verticalLayout_6->addWidget(label_2, 0, Qt::AlignHCenter);
+        horizontalLayout_2->addWidget(label_2);
+
+        plainTextEdit = new QPlainTextEdit(processos);
+        plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
+
+        horizontalLayout_2->addWidget(plainTextEdit);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_2);
 
         pushButton = new QPushButton(processos);
         pushButton->setObjectName(QStringLiteral("pushButton"));
 
-        verticalLayout_6->addWidget(pushButton);
+        verticalLayout_3->addWidget(pushButton);
 
         pushButton_2 = new QPushButton(processos);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
 
-        verticalLayout_6->addWidget(pushButton_2);
+        verticalLayout_3->addWidget(pushButton_2);
 
         comboBox = new QComboBox(processos);
         comboBox->setObjectName(QStringLiteral("comboBox"));
 
-        verticalLayout_6->addWidget(comboBox);
+        verticalLayout_3->addWidget(comboBox);
+
+        verticalSpacer = new QSpacerItem(20, 400, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_3->addItem(verticalSpacer);
 
 
-        horizontalLayout_4->addLayout(verticalLayout_6);
+        horizontalLayout_3->addLayout(verticalLayout_3);
 
-
-        horizontalLayout_3->addLayout(horizontalLayout_4);
-
-        horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setSpacing(6);
-        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         widget_2 = new QCustomPlot(processos);
         widget_2->setObjectName(QStringLiteral("widget_2"));
 
-        horizontalLayout_5->addWidget(widget_2);
-
-
-        horizontalLayout_3->addLayout(horizontalLayout_5);
+        horizontalLayout_3->addWidget(widget_2);
 
         tabWidget->addTab(processos, QString());
         recursos = new QWidget();
@@ -142,10 +150,24 @@ public:
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        widget = new QCustomPlot(recursos);
+        groupBox = new QGroupBox(recursos);
+        groupBox->setObjectName(QStringLiteral("groupBox"));
+        widget = new QCustomPlot(groupBox);
         widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(0, 20, 521, 151));
+        widget_3 = new QWidget(widget);
+        widget_3->setObjectName(QStringLiteral("widget_3"));
+        widget_3->setGeometry(QRect(420, 10, 81, 31));
 
-        verticalLayout->addWidget(widget);
+        verticalLayout->addWidget(groupBox);
+
+        groupBox_2 = new QGroupBox(recursos);
+        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
+        widget_4 = new QCustomPlot(groupBox_2);
+        widget_4->setObjectName(QStringLiteral("widget_4"));
+        widget_4->setGeometry(QRect(0, 20, 521, 151));
+
+        verticalLayout->addWidget(groupBox_2);
 
         tabWidget->addTab(recursos, QString());
         energia = new QWidget();
@@ -177,7 +199,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -192,10 +214,11 @@ public:
         pushButton_2->setText(QApplication::translate("MainWindow", "Atualizar", 0));
         comboBox->clear();
         comboBox->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "Filtrar por Mem\303\263ria", 0)
-         << QApplication::translate("MainWindow", "Filtrar por Thread", 0)
+         << QApplication::translate("MainWindow", "Filtro por Mem\303\263ria", 0)
         );
         tabWidget->setTabText(tabWidget->indexOf(processos), QApplication::translate("MainWindow", "Processos", 0));
+        groupBox->setTitle(QApplication::translate("MainWindow", "Hist\303\263rico de CPU", 0));
+        groupBox_2->setTitle(QApplication::translate("MainWindow", "Hist\303\263rico de Mem\303\263ria", 0));
         tabWidget->setTabText(tabWidget->indexOf(recursos), QApplication::translate("MainWindow", "Recursos", 0));
         tabWidget->setTabText(tabWidget->indexOf(energia), QApplication::translate("MainWindow", "Energia", 0));
     } // retranslateUi

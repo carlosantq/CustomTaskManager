@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QTimer>
+#include <cpuhandler.h>
+#include <graphichandler.h>
 
 namespace Ui {
 class MainWindow;
@@ -19,12 +21,11 @@ public:
 public slots:
     void realtimeDataSlot();
     void resourcesChart();
-    void batteryChargeChart();
-    void batteryDischargeChart();
-    void processesChart();
 
 private:
     Ui::MainWindow *ui;
+    CPUHandler cpu;
+    GraphicHandler gh;
     QTimer dataTimer;
 };
 

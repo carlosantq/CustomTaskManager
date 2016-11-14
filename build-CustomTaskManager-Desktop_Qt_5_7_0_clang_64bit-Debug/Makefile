@@ -50,11 +50,15 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../CustomTaskManager/main.cpp \
 		../CustomTaskManager/mainwindow.cpp \
-		../CustomTaskManager/qcustomplot.cpp moc_mainwindow.cpp \
+		../CustomTaskManager/qcustomplot.cpp \
+		../CustomTaskManager/cpuhandler.cpp \
+		../CustomTaskManager/graphichandler.cpp moc_mainwindow.cpp \
 		moc_qcustomplot.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		qcustomplot.o \
+		cpuhandler.o \
+		graphichandler.o \
 		moc_mainwindow.o \
 		moc_qcustomplot.o
 DIST          = /Applications/QT/5.7/clang_64/mkspecs/features/spec_pre.prf \
@@ -213,9 +217,13 @@ DIST          = /Applications/QT/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		/Applications/QT/5.7/clang_64/mkspecs/features/yacc.prf \
 		/Applications/QT/5.7/clang_64/mkspecs/features/lex.prf \
 		../CustomTaskManager/CustomTaskManager.pro ../CustomTaskManager/mainwindow.h \
-		../CustomTaskManager/qcustomplot.h ../CustomTaskManager/main.cpp \
+		../CustomTaskManager/qcustomplot.h \
+		../CustomTaskManager/cpuhandler.h \
+		../CustomTaskManager/graphichandler.h ../CustomTaskManager/main.cpp \
 		../CustomTaskManager/mainwindow.cpp \
-		../CustomTaskManager/qcustomplot.cpp
+		../CustomTaskManager/qcustomplot.cpp \
+		../CustomTaskManager/cpuhandler.cpp \
+		../CustomTaskManager/graphichandler.cpp
 QMAKE_TARGET  = CustomTaskManager
 DESTDIR       = 
 TARGET        = CustomTaskManager.app/Contents/MacOS/CustomTaskManager
@@ -578,8 +586,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../CustomTaskManager/mainwindow.h ../CustomTaskManager/qcustomplot.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../CustomTaskManager/main.cpp ../CustomTaskManager/mainwindow.cpp ../CustomTaskManager/qcustomplot.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../CustomTaskManager/mainwindow.h ../CustomTaskManager/qcustomplot.h ../CustomTaskManager/cpuhandler.h ../CustomTaskManager/graphichandler.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../CustomTaskManager/main.cpp ../CustomTaskManager/mainwindow.cpp ../CustomTaskManager/qcustomplot.cpp ../CustomTaskManager/cpuhandler.cpp ../CustomTaskManager/graphichandler.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../CustomTaskManager/mainwindow.ui $(DISTDIR)/
 
 
@@ -613,6 +621,13 @@ moc_mainwindow.cpp: /Applications/QT/5.7/clang_64/lib/QtWidgets.framework/Header
 		/Applications/QT/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
 		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../CustomTaskManager/cpuhandler.h \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../CustomTaskManager/mainwindow.h \
 		/Applications/QT/5.7/clang_64/bin/moc
 	/Applications/QT/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Applications/QT/5.7/clang_64/mkspecs/macx-clang -I/Users/carlosant/Downloads/CustomTaskManager/CustomTaskManager -I/Applications/QT/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Applications/QT/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Applications/QT/5.7/clang_64/lib/QtGui.framework/Headers -I/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -I'/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks (framework directory)' -F/Applications/QT/5.7/clang_64/lib ../CustomTaskManager/mainwindow.h -o moc_mainwindow.cpp
@@ -654,6 +669,13 @@ main.o: ../CustomTaskManager/main.cpp ../CustomTaskManager/mainwindow.h \
 		/Applications/QT/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
 		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../CustomTaskManager/cpuhandler.h \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		/Applications/QT/5.7/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		/Applications/QT/5.7/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../CustomTaskManager/main.cpp
@@ -663,6 +685,13 @@ mainwindow.o: ../CustomTaskManager/mainwindow.cpp ../CustomTaskManager/mainwindo
 		/Applications/QT/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
 		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../CustomTaskManager/cpuhandler.h \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		ui_mainwindow.h \
 		../CustomTaskManager/qcustomplot.h \
 		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qmath.h \
@@ -675,6 +704,18 @@ qcustomplot.o: ../CustomTaskManager/qcustomplot.cpp ../CustomTaskManager/qcustom
 		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qnumeric.h \
 		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QtNumeric
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qcustomplot.o ../CustomTaskManager/qcustomplot.cpp
+
+cpuhandler.o: ../CustomTaskManager/cpuhandler.cpp ../CustomTaskManager/cpuhandler.h \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cpuhandler.o ../CustomTaskManager/cpuhandler.cpp
+
+graphichandler.o: ../CustomTaskManager/graphichandler.cpp ../CustomTaskManager/graphichandler.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o graphichandler.o ../CustomTaskManager/graphichandler.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

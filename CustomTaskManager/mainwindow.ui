@@ -23,7 +23,7 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="processos">
          <attribute name="title">
@@ -31,35 +31,23 @@
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="label">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Finalizar Processo</string>
+              </property>
+             </widget>
+            </item>
             <item>
-             <layout class="QVBoxLayout" name="verticalLayout_6">
-              <item alignment="Qt::AlignHCenter">
-               <widget class="QLabel" name="label">
-                <property name="maximumSize">
-                 <size>
-                  <width>150</width>
-                  <height>150</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Finalizar Processo</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
-                </property>
-                <property name="margin">
-                 <number>0</number>
-                </property>
-               </widget>
-              </item>
-              <item alignment="Qt::AlignHCenter">
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
                <widget class="QLabel" name="label_2">
                 <property name="text">
                  <string>PID</string>
@@ -67,43 +55,50 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton">
-                <property name="text">
-                 <string>Kill</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButton_2">
-                <property name="text">
-                 <string>Atualizar</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QComboBox" name="comboBox">
-                <item>
-                 <property name="text">
-                  <string>Filtrar por Memória</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Filtrar por Thread</string>
-                 </property>
-                </item>
-               </widget>
+               <widget class="QPlainTextEdit" name="plainTextEdit"/>
               </item>
              </layout>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton">
+              <property name="text">
+               <string>Kill</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_2">
+              <property name="text">
+               <string>Atualizar</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBox">
+              <item>
+               <property name="text">
+                <string>Filtro por Memória</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>400</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_5">
-            <item>
-             <widget class="QCustomPlot" name="widget_2" native="true"/>
-            </item>
-           </layout>
+           <widget class="QCustomPlot" name="widget_2" native="true"/>
           </item>
          </layout>
         </widget>
@@ -113,7 +108,48 @@
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QCustomPlot" name="widget" native="true"/>
+           <widget class="QGroupBox" name="groupBox">
+            <property name="title">
+             <string>Histórico de CPU</string>
+            </property>
+            <widget class="QCustomPlot" name="widget" native="true">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>20</y>
+               <width>521</width>
+               <height>151</height>
+              </rect>
+             </property>
+             <widget class="QWidget" name="widget_3" native="true">
+              <property name="geometry">
+               <rect>
+                <x>420</x>
+                <y>10</y>
+                <width>81</width>
+                <height>31</height>
+               </rect>
+              </property>
+             </widget>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_2">
+            <property name="title">
+             <string>Histórico de Memória</string>
+            </property>
+            <widget class="QCustomPlot" name="widget_4" native="true">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>20</y>
+               <width>521</width>
+               <height>151</height>
+              </rect>
+             </property>
+            </widget>
+           </widget>
           </item>
          </layout>
         </widget>
