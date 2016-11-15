@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     resourcesChart();
     memoryChart();
+    batteryDischargeChart();
 }
 
 MainWindow::~MainWindow()
@@ -75,6 +76,29 @@ void MainWindow::memoryChart(){
     dataTimer.start(0); // Interval 0 means to refresh as fast as possible
 }
 
+void MainWindow::batteryDischargeChart(){
+    battery.readBattery();
+
+    ui->discharge->legend->setVisible(true);
+    ui->discharge->addGraph();
+
+    ui->discharge->graph(0)->setPen(QColor(255, 110, 40));
+    ui->discharge->graph(0)->setName("Tempo de Descarga");
+
+    QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
+    timeTicker->setTimeFormat("%h:%m:%s");
+    ui->discharge->xAxis->setTicker(timeTicker);
+    ui->discharge->axisRect()->setupFullAxesBox();
+    ui->discharge->yAxis->setRange(0, 600);
+
+    // make left and bottom axes transfer their ranges to right and top axes:
+    connect(ui->discharge->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->discharge->xAxis2, SLOT(setRange(QCPRange)));
+    connect(ui->discharge->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->discharge->yAxis2, SLOT(setRange(QCPRange)));
+
+    connect(&dataTimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot3()));
+    dataTimer.start(0); // Interval 0 means to refresh as fast as possible
+}
+
 void MainWindow::realtimeDataSlot(){
     int i = 0;
     int n = cpu.getNumberOfCPU();
@@ -134,5 +158,25 @@ void MainWindow::realtimeDataSlot2(){
     // make key axis range scroll with the data (at a constant range size of 8):
     ui->memoryHistory->xAxis->setRange(key, 8, Qt::AlignRight);
     ui->memoryHistory->replot();
+}
+
+void MainWindow::realtimeDataSlot3(){
+
+    static QTime time(QTime::currentTime());
+    // calculate two new data points:
+    double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
+    static double lastPointKey = 0;
+    if (key-lastPointKey > 0.002) // at most add point every 2 ms
+    {
+
+      battery.readBattery();
+
+      ui->discharge->graph(0)->addData(key, battery.getDischarge());
+
+      lastPointKey = key;
+    }
+    // make key axis range scroll with the data (at a constant range size of 8):
+    ui->discharge->xAxis->setRange(key, 8, Qt::AlignRight);
+    ui->discharge->replot();
 }
 

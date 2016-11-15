@@ -52,13 +52,15 @@ SOURCES       = ../CustomTaskManager/main.cpp \
 		../CustomTaskManager/mainwindow.cpp \
 		../CustomTaskManager/qcustomplot.cpp \
 		../CustomTaskManager/cpuhandler.cpp \
-		../CustomTaskManager/memoryhandler.cpp moc_mainwindow.cpp \
+		../CustomTaskManager/memoryhandler.cpp \
+		../CustomTaskManager/batteryhandler.cpp moc_mainwindow.cpp \
 		moc_qcustomplot.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		qcustomplot.o \
 		cpuhandler.o \
 		memoryhandler.o \
+		batteryhandler.o \
 		moc_mainwindow.o \
 		moc_qcustomplot.o
 DIST          = /Applications/QT/5.7/clang_64/mkspecs/features/spec_pre.prf \
@@ -219,11 +221,13 @@ DIST          = /Applications/QT/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../CustomTaskManager/CustomTaskManager.pro ../CustomTaskManager/mainwindow.h \
 		../CustomTaskManager/qcustomplot.h \
 		../CustomTaskManager/cpuhandler.h \
-		../CustomTaskManager/memoryhandler.h ../CustomTaskManager/main.cpp \
+		../CustomTaskManager/memoryhandler.h \
+		../CustomTaskManager/batteryhandler.h ../CustomTaskManager/main.cpp \
 		../CustomTaskManager/mainwindow.cpp \
 		../CustomTaskManager/qcustomplot.cpp \
 		../CustomTaskManager/cpuhandler.cpp \
-		../CustomTaskManager/memoryhandler.cpp
+		../CustomTaskManager/memoryhandler.cpp \
+		../CustomTaskManager/batteryhandler.cpp
 QMAKE_TARGET  = CustomTaskManager
 DESTDIR       = 
 TARGET        = CustomTaskManager.app/Contents/MacOS/CustomTaskManager
@@ -586,8 +590,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../CustomTaskManager/mainwindow.h ../CustomTaskManager/qcustomplot.h ../CustomTaskManager/cpuhandler.h ../CustomTaskManager/memoryhandler.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../CustomTaskManager/main.cpp ../CustomTaskManager/mainwindow.cpp ../CustomTaskManager/qcustomplot.cpp ../CustomTaskManager/cpuhandler.cpp ../CustomTaskManager/memoryhandler.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../CustomTaskManager/mainwindow.h ../CustomTaskManager/qcustomplot.h ../CustomTaskManager/cpuhandler.h ../CustomTaskManager/memoryhandler.h ../CustomTaskManager/batteryhandler.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../CustomTaskManager/main.cpp ../CustomTaskManager/mainwindow.cpp ../CustomTaskManager/qcustomplot.cpp ../CustomTaskManager/cpuhandler.cpp ../CustomTaskManager/memoryhandler.cpp ../CustomTaskManager/batteryhandler.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../CustomTaskManager/mainwindow.ui $(DISTDIR)/
 
 
@@ -629,6 +633,7 @@ moc_mainwindow.cpp: /Applications/QT/5.7/clang_64/lib/QtWidgets.framework/Header
 		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
 		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../CustomTaskManager/memoryhandler.h \
+		../CustomTaskManager/batteryhandler.h \
 		../CustomTaskManager/mainwindow.h \
 		/Applications/QT/5.7/clang_64/bin/moc
 	/Applications/QT/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Applications/QT/5.7/clang_64/mkspecs/macx-clang -I/Users/carlosant/Downloads/CustomTaskManager/CustomTaskManager -I/Applications/QT/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Applications/QT/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Applications/QT/5.7/clang_64/lib/QtGui.framework/Headers -I/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -I'/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks (framework directory)' -F/Applications/QT/5.7/clang_64/lib ../CustomTaskManager/mainwindow.h -o moc_mainwindow.cpp
@@ -678,6 +683,7 @@ main.o: ../CustomTaskManager/main.cpp ../CustomTaskManager/mainwindow.h \
 		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
 		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../CustomTaskManager/memoryhandler.h \
+		../CustomTaskManager/batteryhandler.h \
 		/Applications/QT/5.7/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		/Applications/QT/5.7/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../CustomTaskManager/main.cpp
@@ -695,6 +701,7 @@ mainwindow.o: ../CustomTaskManager/mainwindow.cpp ../CustomTaskManager/mainwindo
 		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
 		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../CustomTaskManager/memoryhandler.h \
+		../CustomTaskManager/batteryhandler.h \
 		ui_mainwindow.h \
 		../CustomTaskManager/qcustomplot.h \
 		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qmath.h \
@@ -719,6 +726,15 @@ cpuhandler.o: ../CustomTaskManager/cpuhandler.cpp ../CustomTaskManager/cpuhandle
 
 memoryhandler.o: ../CustomTaskManager/memoryhandler.cpp ../CustomTaskManager/memoryhandler.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o memoryhandler.o ../CustomTaskManager/memoryhandler.cpp
+
+batteryhandler.o: ../CustomTaskManager/batteryhandler.cpp ../CustomTaskManager/batteryhandler.h \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Applications/QT/5.7/clang_64/lib/QtCore.framework/Headers/qdebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o batteryhandler.o ../CustomTaskManager/batteryhandler.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <cpuhandler.h>
 #include <memoryhandler.h>
+#include <batteryhandler.h>
 
 namespace Ui {
 class MainWindow;
@@ -19,15 +20,18 @@ public:
     ~MainWindow();
 
 public slots:
-    void realtimeDataSlot();
     void resourcesChart();
+    void realtimeDataSlot();
     void memoryChart();
     void realtimeDataSlot2();
+    void batteryDischargeChart();
+    void realtimeDataSlot3();
 
 private:
     Ui::MainWindow *ui;
     CPUHandler cpu;
     MemoryHandler memory;
+    BatteryHandler battery;
     QTimer dataTimer;
 };
 

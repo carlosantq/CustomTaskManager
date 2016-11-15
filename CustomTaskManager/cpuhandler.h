@@ -5,6 +5,9 @@
 #include <iostream>
 #include <QTextStream>
 #include <QDebug>
+#include <stdlib.h>
+#include <time.h>
+#include <iostream>
 
 class CPUHandler
 {

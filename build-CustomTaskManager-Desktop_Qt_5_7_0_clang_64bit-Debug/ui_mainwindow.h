@@ -36,7 +36,7 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout_4;
     QHBoxLayout *horizontalLayout;
     QTabWidget *tabWidget;
     QWidget *processos;
@@ -70,14 +70,14 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(591, 463);
+        MainWindow->resize(714, 544);
         MainWindow->setAcceptDrops(true);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        verticalLayout_2 = new QVBoxLayout(centralWidget);
-        verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        horizontalLayout_4 = new QHBoxLayout(centralWidget);
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
@@ -184,16 +184,16 @@ public:
         energia->setObjectName(QStringLiteral("energia"));
         charge = new QCustomPlot(energia);
         charge->setObjectName(QStringLiteral("charge"));
-        charge->setGeometry(QRect(40, 10, 201, 311));
+        charge->setGeometry(QRect(10, 10, 311, 411));
         discharge = new QCustomPlot(energia);
         discharge->setObjectName(QStringLiteral("discharge"));
-        discharge->setGeometry(QRect(300, 10, 221, 291));
+        discharge->setGeometry(QRect(360, 10, 311, 411));
         tabWidget->addTab(energia, QString());
 
         horizontalLayout->addWidget(tabWidget);
 
 
-        verticalLayout_2->addLayout(horizontalLayout);
+        horizontalLayout_4->addLayout(horizontalLayout);
 
         MainWindow->setCentralWidget(centralWidget);
         statusBar = new QStatusBar(MainWindow);
@@ -204,12 +204,12 @@ public:
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 591, 22));
+        menuBar->setGeometry(QRect(0, 0, 714, 22));
         MainWindow->setMenuBar(menuBar);
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

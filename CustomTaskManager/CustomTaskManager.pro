@@ -16,11 +16,13 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     qcustomplot.cpp \
     cpuhandler.cpp \
-    memoryhandler.cpp
+    memoryhandler.cpp \
+    batteryhandler.cpp
 
 HEADERS  += mainwindow.h \
     qcustomplot.h \
     cpuhandler.h \
-    memoryhandler.h
+    memoryhandler.h \
+    batteryhandler.h
 
 FORMS    += mainwindow.ui
