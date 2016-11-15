@@ -12,9 +12,16 @@ public:
     CPUHandler();
     bool defineNumberOfCPU();
     int getNumberOfCPU();
+    void randomColors();
+    int getColor1();
+    int getColor2();
+    int getColor3();
 
 private:
     int numberOfCPU;
+    int color1;
+    int color2;
+    int color3;
 };
 
 #endif // CPUHANDLER_H

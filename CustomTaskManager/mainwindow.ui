@@ -112,26 +112,11 @@
             <property name="title">
              <string>Histórico de CPU</string>
             </property>
-            <widget class="QCustomPlot" name="widget" native="true">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>20</y>
-               <width>521</width>
-               <height>151</height>
-              </rect>
-             </property>
-             <widget class="QWidget" name="widget_3" native="true">
-              <property name="geometry">
-               <rect>
-                <x>420</x>
-                <y>10</y>
-                <width>81</width>
-                <height>31</height>
-               </rect>
-              </property>
-             </widget>
-            </widget>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <widget class="QCustomPlot" name="cpuHistory" native="true"/>
+             </item>
+            </layout>
            </widget>
           </item>
           <item>
@@ -139,16 +124,11 @@
             <property name="title">
              <string>Histórico de Memória</string>
             </property>
-            <widget class="QCustomPlot" name="widget_4" native="true">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>20</y>
-               <width>521</width>
-               <height>151</height>
-              </rect>
-             </property>
-            </widget>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <item>
+              <widget class="QCustomPlot" name="memoryHistory" native="true"/>
+             </item>
+            </layout>
            </widget>
           </item>
          </layout>

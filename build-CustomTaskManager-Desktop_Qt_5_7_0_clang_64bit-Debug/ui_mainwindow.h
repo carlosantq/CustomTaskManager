@@ -54,10 +54,11 @@ public:
     QWidget *recursos;
     QVBoxLayout *verticalLayout;
     QGroupBox *groupBox;
-    QCustomPlot *widget;
-    QWidget *widget_3;
+    QVBoxLayout *verticalLayout_4;
+    QCustomPlot *cpuHistory;
     QGroupBox *groupBox_2;
-    QCustomPlot *widget_4;
+    QVBoxLayout *verticalLayout_5;
+    QCustomPlot *memoryHistory;
     QWidget *energia;
     QCustomPlot *charge;
     QCustomPlot *discharge;
@@ -152,20 +153,29 @@ public:
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         groupBox = new QGroupBox(recursos);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        widget = new QCustomPlot(groupBox);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(0, 20, 521, 151));
-        widget_3 = new QWidget(widget);
-        widget_3->setObjectName(QStringLiteral("widget_3"));
-        widget_3->setGeometry(QRect(420, 10, 81, 31));
+        verticalLayout_4 = new QVBoxLayout(groupBox);
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        cpuHistory = new QCustomPlot(groupBox);
+        cpuHistory->setObjectName(QStringLiteral("cpuHistory"));
+
+        verticalLayout_4->addWidget(cpuHistory);
+
 
         verticalLayout->addWidget(groupBox);
 
         groupBox_2 = new QGroupBox(recursos);
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
-        widget_4 = new QCustomPlot(groupBox_2);
-        widget_4->setObjectName(QStringLiteral("widget_4"));
-        widget_4->setGeometry(QRect(0, 20, 521, 151));
+        verticalLayout_5 = new QVBoxLayout(groupBox_2);
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
+        memoryHistory = new QCustomPlot(groupBox_2);
+        memoryHistory->setObjectName(QStringLiteral("memoryHistory"));
+
+        verticalLayout_5->addWidget(memoryHistory);
+
 
         verticalLayout->addWidget(groupBox_2);
 

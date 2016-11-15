@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QTimer>
 #include <cpuhandler.h>
-#include <graphichandler.h>
+#include <memoryhandler.h>
 
 namespace Ui {
 class MainWindow;
@@ -21,11 +21,13 @@ public:
 public slots:
     void realtimeDataSlot();
     void resourcesChart();
+    void memoryChart();
+    void realtimeDataSlot2();
 
 private:
     Ui::MainWindow *ui;
     CPUHandler cpu;
-    GraphicHandler gh;
+    MemoryHandler memory;
     QTimer dataTimer;
 };
 

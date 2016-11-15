@@ -2,6 +2,28 @@
 
 CPUHandler::CPUHandler()
 {
+    srand(time(NULL));
+    this->color1=rand()%255;
+    this->color2=rand()%255;
+    this->color3=rand()%255;
+}
+
+void CPUHandler::randomColors(){
+    this->color1=rand()%255;
+    this->color2=rand()%255;
+    this->color3=rand()%255;
+}
+
+int CPUHandler::getColor1(){
+    return this->color1;
+}
+
+int CPUHandler::getColor2(){
+    return this->color2;
+}
+
+int CPUHandler::getColor3(){
+    return this->color3;
 }
 
 bool CPUHandler::defineNumberOfCPU()
