@@ -65,7 +65,7 @@ void MainWindow::memoryChart(){
     timeTicker->setTimeFormat("%h:%m:%s");
     ui->memoryHistory->xAxis->setTicker(timeTicker);
     ui->memoryHistory->axisRect()->setupFullAxesBox();
-    ui->memoryHistory->yAxis->setRange(0, 100);
+    ui->memoryHistory->yAxis->setRange(-0.01, 1);
 
     // make left and bottom axes transfer their ranges to right and top axes:
     connect(ui->memoryHistory->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->memoryHistory->xAxis2, SLOT(setRange(QCPRange)));
@@ -116,8 +116,19 @@ void MainWindow::realtimeDataSlot2(){
 
       double t = memory.getTotalMemory();
       double u = memory.getUsedMemory();
+      double ram = u/t;
 
-      ui->memoryHistory->graph(0)->addData(key, (u/t)*100);
+      double ts = memory.getTotalSwap();
+      double us = memory.getUsedSwap();
+      double swap;
+      if (ts == 0 && us == 0){
+          swap = 0;
+      }else{
+          swap = us/ts;
+      }
+
+      ui->memoryHistory->graph(0)->addData(key, ram);
+      ui->memoryHistory->graph(1)->addData(key, swap);
 
     }
     // make key axis range scroll with the data (at a constant range size of 8):

@@ -13,12 +13,14 @@ public:
     MemoryHandler();
     int getUsedMemory();
     int getTotalMemory();
-    void setUsedMemory(int usedMemory);
-    void setTotalMemory(int totalMemory);
+    int getUsedSwap();
+    int getTotalSwap();
     void readMemory();
 private:
     int usedMemory;
     int totalMemory;
+    int usedSwap;
+    int totalSwap;
 };
 
 #endif // MEMORYHANDLER_H
