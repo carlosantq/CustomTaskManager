@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <iostream>
+#include <fstream>
+#include <QVector>
 
 class CPUHandler
 {
@@ -19,6 +21,7 @@ public:
     int getColor1();
     int getColor2();
     int getColor3();
+    QVector<double> getUsage();
 
 private:
     int numberOfCPU;

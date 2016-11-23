@@ -17,7 +17,6 @@ bool BatteryHandler::readBattery(){
     int pscn = 0;
     int pschf = 0;
     int pschn = 0;
-    QString teste;
     bool returnInformation = false;
 
     //Teste /Users/carlosant/Documents/battery.txt
@@ -48,9 +47,9 @@ bool BatteryHandler::readBattery(){
             }
         }
 
-        std::cout << pscn << std::endl;
-        std::cout << pschf << std::endl;
-        std::cout << pschn << std::endl;
+        //std::cout << pscn << std::endl;
+        //std::cout << pschf << std::endl;
+        //std::cout << pschn << std::endl;
 
         this->discharge = double (pschf-pschn)/pscn;
         this->discharge*=60;

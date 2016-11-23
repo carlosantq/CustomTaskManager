@@ -23,7 +23,7 @@ void MainWindow::resourcesChart(){
     ui->cpuHistory->legend->setVisible(true);
 
     while (i < n){
-        ui->cpuHistory->addGraph(); // blue line
+        ui->cpuHistory->addGraph();
         ui->cpuHistory->graph(i)->setPen(QPen(QColor(cpu.getColor1(), cpu.getColor2(), cpu.getColor3())));
 
         QString name = QString("CPU %1").arg(i);
@@ -109,8 +109,9 @@ void MainWindow::realtimeDataSlot(){
     static double lastPointKey = 0;
     if (key-lastPointKey > 0.002) // at most add point every 2 ms
     {
+      QVector<double> usagePerCPU = cpu.getUsage();
       while(i < n){
-          ui->cpuHistory->graph(i)->addData(key, qSin(key)+qrand()/(double)RAND_MAX*1*qSin(key/0.385));
+          ui->cpuHistory->graph(i)->addData(key, usagePerCPU[i]/100);
           i++;
       }
       // add data to lines:
