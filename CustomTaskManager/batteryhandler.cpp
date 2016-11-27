@@ -62,6 +62,8 @@ bool BatteryHandler::readBattery(){
         if (this->status == "Charging"){
             this->discharge = double (pschf-pschn)/pscn;
             this->discharge*=60;
+        }else if (this->status == "Full"){
+            this->discharge =  0;
         }else{
             this->discharge = double (pschn)/pscn;
             this->discharge*=60;

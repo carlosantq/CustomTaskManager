@@ -81,7 +81,7 @@ void MainWindow::batteryDischargeChart(){
     ui->discharge->graph(0)->setPen(QColor(255, 110, 40));
 
     battery.readBattery();
-    if (battery.getStatus() == "Charging"){
+    if (battery.getStatus() == "Charging" || battery.getStatus() == "Full"){
         ui->discharge->graph(0)->setName("Tempo de Carga (min)");
     }else{
         ui->discharge->graph(0)->setName("Tempo de Descarga (min)");
