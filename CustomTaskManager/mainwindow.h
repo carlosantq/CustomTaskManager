@@ -26,6 +26,8 @@ public slots:
     void realtimeDataSlot2();
     void batteryDischargeChart();
     void realtimeDataSlot3();
+    void batteryChargeChart();
+    void realtimeDataSlot4();
 
 private:
     Ui::MainWindow *ui;

@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     resourcesChart();
     memoryChart();
     batteryDischargeChart();
+    batteryChargeChart();
 }
 
 MainWindow::~MainWindow()
@@ -77,8 +78,6 @@ void MainWindow::memoryChart(){
 }
 
 void MainWindow::batteryDischargeChart(){
-    battery.readBattery();
-
     ui->discharge->legend->setVisible(true);
     ui->discharge->addGraph();
 
@@ -89,13 +88,34 @@ void MainWindow::batteryDischargeChart(){
     timeTicker->setTimeFormat("%h:%m:%s");
     ui->discharge->xAxis->setTicker(timeTicker);
     ui->discharge->axisRect()->setupFullAxesBox();
-    ui->discharge->yAxis->setRange(0, 600);
+    ui->discharge->yAxis->setRange(0, 60);
 
     // make left and bottom axes transfer their ranges to right and top axes:
     connect(ui->discharge->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->discharge->xAxis2, SLOT(setRange(QCPRange)));
     connect(ui->discharge->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->discharge->yAxis2, SLOT(setRange(QCPRange)));
 
     connect(&dataTimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot3()));
+    dataTimer.start(0); // Interval 0 means to refresh as fast as possible
+}
+
+void MainWindow::batteryChargeChart(){
+    ui->charge->legend->setVisible(true);
+    ui->charge->addGraph();
+
+    ui->charge->graph(0)->setPen(QColor(40, 110, 255));
+    ui->charge->graph(0)->setName("Carga");
+
+    QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
+    timeTicker->setTimeFormat("%h:%m:%s");
+    ui->charge->xAxis->setTicker(timeTicker);
+    ui->charge->axisRect()->setupFullAxesBox();
+    ui->charge->yAxis->setRange(0, 1);
+
+    // make left and bottom axes transfer their ranges to right and top axes:
+    connect(ui->charge->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->charge->xAxis2, SLOT(setRange(QCPRange)));
+    connect(ui->charge->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->charge->yAxis2, SLOT(setRange(QCPRange)));
+
+    connect(&dataTimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot4()));
     dataTimer.start(0); // Interval 0 means to refresh as fast as possible
 }
 
@@ -107,7 +127,7 @@ void MainWindow::realtimeDataSlot(){
     // calculate two new data points:
     double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
     static double lastPointKey = 0;
-    if (key-lastPointKey > 0.05) // at most add point every 2 ms
+    if (key-lastPointKey > 0.005) // at most add point every 2 ms
     {
       //cpu.getUsage();
       QVector<double> usagePerCPU = cpu.getUsage();
@@ -185,4 +205,22 @@ void MainWindow::realtimeDataSlot3(){
     // make key axis range scroll with the data (at a constant range size of 8):
     ui->discharge->xAxis->setRange(key, 8, Qt::AlignRight);
     ui->discharge->replot();
+}
+
+void MainWindow::realtimeDataSlot4(){
+
+    static QTime time(QTime::currentTime());
+    double key = time.elapsed()/1000.0;
+    static double lastPointKey = 0;
+    if (key-lastPointKey > 0.002)
+    {
+
+      battery.readBattery();
+
+      ui->charge->graph(0)->addData(key, battery.getCharge());
+
+      lastPointKey = key;
+    }
+    ui->charge->xAxis->setRange(key, 8, Qt::AlignRight);
+    ui->charge->replot();
 }

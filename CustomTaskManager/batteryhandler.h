@@ -12,11 +12,11 @@ class BatteryHandler
 {
 public:
     BatteryHandler();
-    int getCharge();
+    double getCharge();
     double getDischarge();
     bool readBattery();
 private:
-    int charge;
+    double charge;
     double discharge;
     QString teste;
 };

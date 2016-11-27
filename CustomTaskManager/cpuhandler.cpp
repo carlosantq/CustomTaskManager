@@ -140,14 +140,7 @@ QVector<double> CPUHandler::getUsage()
             this->currentUsage[i] = user + nice + system + softirq;
             this->currentUsage[i+n] = user + nice + system + softirq + idle + iowait;
 
-//            std::cout << this->currentUsage[i] << std::endl;
-//            std::cout << this->previousUsage[i] << std::endl;
-//            std::cout << this->currentUsage[i+n] << std::endl;
-//            std::cout << this->previousUsage[i+n] << std::endl;
-
             this->totalUsage[i] = (100*(this->currentUsage[i]-this->previousUsage[i]) / (this->currentUsage[i+n]-this->previousUsage[i+n]));
-
-            std::cout << "cpu " << i << ": " << this->totalUsage[i] << std::endl;
 
             this->previousUsage[i] = this->currentUsage[i];
             this->previousUsage[i+n] = this->currentUsage[i+n];
