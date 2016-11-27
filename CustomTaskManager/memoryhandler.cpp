@@ -2,6 +2,10 @@
 
 MemoryHandler::MemoryHandler()
 {
+    this->usedMemory = 0;
+    this->totalMemory = 0;
+    this->usedSwap = 0;
+    this->totalSwap = 0;
 }
 
 int MemoryHandler::getUsedMemory(){
@@ -21,32 +25,33 @@ int MemoryHandler::getTotalSwap(){
 }
 
 void MemoryHandler::readMemory(){
-    std::ifstream memoryFile;
-    std::string memoryInfo;
     //ATTENTION: uncomment this and put your build directory/mem.txt after the >
-    //system("free -m > xxxxx");
+    system("free -m > /home/carlos/Downloads/CustomTaskManager/CustomTaskManager/mem.txt");
     //ATTENTION: change to your build directory
-    memoryFile.open("/Users/carlosant/Downloads/CustomTaskManager/build-CustomTaskManager-Desktop_Qt_5_7_0_clang_64bit-Debug/mem.txt");
+    std::ifstream memoryFile("/home/carlos/Downloads/CustomTaskManager/CustomTaskManager/mem.txt");
+    std::string memoryInfo;
 
-    //RAM
-    memoryFile >> memoryInfo;
-    while (memoryInfo != "Mem:"){
+    if (memoryFile.is_open() == true){
+        //RAM
         memoryFile >> memoryInfo;
-    }
+        while (memoryInfo != "Mem:"){
+            memoryFile >> memoryInfo;
+        }
 
-    memoryFile >> memoryInfo;
-    this->totalMemory=(atoi(memoryInfo.c_str()));
-    memoryFile >> memoryInfo;
-    this->usedMemory=(atoi(memoryInfo.c_str()));
-
-    //Swap
-    memoryFile >> memoryInfo;
-    while (memoryInfo != "Swap:"){
         memoryFile >> memoryInfo;
-    }
+        this->totalMemory=(atoi(memoryInfo.c_str()));
+        memoryFile >> memoryInfo;
+        this->usedMemory=(atoi(memoryInfo.c_str()));
 
-    memoryFile >> memoryInfo;
-    this->totalSwap=(atoi(memoryInfo.c_str()));
-    memoryFile >> memoryInfo;
-    this->usedSwap=(atoi(memoryInfo.c_str()));
+        //Swap
+        memoryFile >> memoryInfo;
+        while (memoryInfo != "Swap:"){
+            memoryFile >> memoryInfo;
+        }
+
+        memoryFile >> memoryInfo;
+        this->totalSwap=(atoi(memoryInfo.c_str()));
+        memoryFile >> memoryInfo;
+        this->usedSwap=(atoi(memoryInfo.c_str()));
+    }
 }

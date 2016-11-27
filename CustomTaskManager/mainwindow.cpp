@@ -107,8 +107,9 @@ void MainWindow::realtimeDataSlot(){
     // calculate two new data points:
     double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
     static double lastPointKey = 0;
-    if (key-lastPointKey > 0.002) // at most add point every 2 ms
+    if (key-lastPointKey > 0.05) // at most add point every 2 ms
     {
+      //cpu.getUsage();
       QVector<double> usagePerCPU = cpu.getUsage();
       while(i < n){
           ui->cpuHistory->graph(i)->addData(key, usagePerCPU[i]/100);
@@ -141,7 +142,12 @@ void MainWindow::realtimeDataSlot2(){
 
       double t = memory.getTotalMemory();
       double u = memory.getUsedMemory();
-      double ram = u/t;
+      double ram;
+      if (t == 0 && u == 0){
+          ram = 0;
+      }else{
+          ram = u/t;
+      }
 
       double ts = memory.getTotalSwap();
       double us = memory.getUsedSwap();
@@ -180,4 +186,3 @@ void MainWindow::realtimeDataSlot3(){
     ui->discharge->xAxis->setRange(key, 8, Qt::AlignRight);
     ui->discharge->replot();
 }
-
