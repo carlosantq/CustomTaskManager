@@ -4,6 +4,7 @@ BatteryHandler::BatteryHandler()
 {
     this->charge = 0;
     this->discharge = 0;
+    this->status = "Discharging";
 }
 
 double BatteryHandler::getCharge(){
@@ -14,12 +15,15 @@ double BatteryHandler::getDischarge(){
     return this->discharge;
 }
 
+QString BatteryHandler::getStatus(){
+    return this->status;
+}
+
 bool BatteryHandler::readBattery(){
     int pscn = 1;
     int pschf = 1;
     int pschn = 1;
     bool returnInformation = false;
-    QString status;
 
     //Teste /Users/carlosant/Documents/battery.txt
     //Real /sys/class/power_supply/BAT0/uevent
@@ -37,7 +41,7 @@ bool BatteryHandler::readBattery(){
         }else if (line.mid(0, 24) == "POWER_SUPPLY_CHARGE_NOW=" || line.mid(0, 24) == "POWER_SUPPLY_ENERGY_NOW="){
             pschn = line.mid(24, line.length()).toInt();
         }else if (line.mid(0, 20) == "POWER_SUPPLY_STATUS="){
-            status = line.mid(20, line.length());
+            this->status = line.mid(20, line.length());
         }
 
         while (!line.isNull()){
@@ -51,11 +55,11 @@ bool BatteryHandler::readBattery(){
             }else if (line.mid(0, 24) == "POWER_SUPPLY_CHARGE_NOW=" || line.mid(0, 24) == "POWER_SUPPLY_ENERGY_NOW="){
                 pschn = line.mid(24, line.length()).toInt();
             }else if (line.mid(0, 20) == "POWER_SUPPLY_STATUS="){
-                status = line.mid(20, line.length());
+                this->status = line.mid(20, line.length());
             }
         }
 
-        if (status == "Charging"){
+        if (this->status == "Charging"){
             this->discharge = double (pschf-pschn)/pscn;
             this->discharge*=60;
         }else{

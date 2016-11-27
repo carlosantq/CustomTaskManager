@@ -14,11 +14,12 @@ public:
     BatteryHandler();
     double getCharge();
     double getDischarge();
+    QString getStatus();
     bool readBattery();
 private:
     double charge;
     double discharge;
-    QString teste;
+    QString status;
 };
 
 #endif // BATTERYHANDLER_H

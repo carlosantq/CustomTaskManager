@@ -39,7 +39,7 @@ void MainWindow::resourcesChart(){
     timeTicker->setTimeFormat("%h:%m:%s");
     ui->cpuHistory->xAxis->setTicker(timeTicker);
     ui->cpuHistory->axisRect()->setupFullAxesBox();
-    ui->cpuHistory->yAxis->setRange(0, 1);
+    ui->cpuHistory->yAxis->setRange(-0.01, 1.01);
 
     // make left and bottom axes transfer their ranges to right and top axes:
     connect(ui->cpuHistory->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->cpuHistory->xAxis2, SLOT(setRange(QCPRange)));
@@ -67,7 +67,7 @@ void MainWindow::memoryChart(){
     timeTicker->setTimeFormat("%h:%m:%s");
     ui->memoryHistory->xAxis->setTicker(timeTicker);
     ui->memoryHistory->axisRect()->setupFullAxesBox();
-    ui->memoryHistory->yAxis->setRange(-0.01, 1);
+    ui->memoryHistory->yAxis->setRange(-0.01, 1.01);
 
     // make left and bottom axes transfer their ranges to right and top axes:
     connect(ui->memoryHistory->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->memoryHistory->xAxis2, SLOT(setRange(QCPRange)));
@@ -82,13 +82,19 @@ void MainWindow::batteryDischargeChart(){
     ui->discharge->addGraph();
 
     ui->discharge->graph(0)->setPen(QColor(255, 110, 40));
-    ui->discharge->graph(0)->setName("Tempo de Descarga (min)");
+
+    battery.readBattery();
+    if (battery.getStatus() == "Charging"){
+        ui->discharge->graph(0)->setName("Tempo de Carga (min)");
+    }else{
+        ui->discharge->graph(0)->setName("Tempo de Descarga (min)");
+    }
 
     QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
     timeTicker->setTimeFormat("%h:%m:%s");
     ui->discharge->xAxis->setTicker(timeTicker);
     ui->discharge->axisRect()->setupFullAxesBox();
-    ui->discharge->yAxis->setRange(0, 300);
+    ui->discharge->yAxis->setRange(-1, 301);
 
     // make left and bottom axes transfer their ranges to right and top axes:
     connect(ui->discharge->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->discharge->xAxis2, SLOT(setRange(QCPRange)));
@@ -103,13 +109,13 @@ void MainWindow::batteryChargeChart(){
     ui->charge->addGraph();
 
     ui->charge->graph(0)->setPen(QColor(40, 110, 255));
-    ui->charge->graph(0)->setName("Carga");
+    ui->charge->graph(0)->setName("Carga (%)");
 
     QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
     timeTicker->setTimeFormat("%h:%m:%s");
     ui->charge->xAxis->setTicker(timeTicker);
     ui->charge->axisRect()->setupFullAxesBox();
-    ui->charge->yAxis->setRange(0, 1);
+    ui->charge->yAxis->setRange(-0.01, 1.01);
 
     // make left and bottom axes transfer their ranges to right and top axes:
     connect(ui->charge->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->charge->xAxis2, SLOT(setRange(QCPRange)));
@@ -218,6 +224,7 @@ void MainWindow::realtimeDataSlot4(){
       battery.readBattery();
 
       ui->charge->graph(0)->addData(key, battery.getCharge());
+      std::cout << (battery.getCharge()) << std::endl;
 
       lastPointKey = key;
     }
