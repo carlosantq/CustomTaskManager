@@ -6,6 +6,7 @@
 #include <cpuhandler.h>
 #include <memoryhandler.h>
 #include <batteryhandler.h>
+#include <thread>
 
 namespace Ui {
 class MainWindow;

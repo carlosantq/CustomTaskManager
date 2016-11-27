@@ -41,13 +41,11 @@ void MainWindow::resourcesChart(){
     ui->cpuHistory->axisRect()->setupFullAxesBox();
     ui->cpuHistory->yAxis->setRange(-0.01, 1.01);
 
-    // make left and bottom axes transfer their ranges to right and top axes:
     connect(ui->cpuHistory->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->cpuHistory->xAxis2, SLOT(setRange(QCPRange)));
     connect(ui->cpuHistory->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->cpuHistory->yAxis2, SLOT(setRange(QCPRange)));
 
-    // setup a timer that repeatedly calls MainWindow::realtimeDataSlot:
     connect(&dataTimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot()));
-    dataTimer.start(0); // Interval 0 means to refresh as fast as possible
+    dataTimer.start(0);
 }
 
 void MainWindow::memoryChart(){
@@ -69,12 +67,11 @@ void MainWindow::memoryChart(){
     ui->memoryHistory->axisRect()->setupFullAxesBox();
     ui->memoryHistory->yAxis->setRange(-0.01, 1.01);
 
-    // make left and bottom axes transfer their ranges to right and top axes:
     connect(ui->memoryHistory->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->memoryHistory->xAxis2, SLOT(setRange(QCPRange)));
     connect(ui->memoryHistory->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->memoryHistory->yAxis2, SLOT(setRange(QCPRange)));
 
     connect(&dataTimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot2()));
-    dataTimer.start(0); // Interval 0 means to refresh as fast as possible
+    dataTimer.start(0);
 }
 
 void MainWindow::batteryDischargeChart(){
@@ -96,12 +93,11 @@ void MainWindow::batteryDischargeChart(){
     ui->discharge->axisRect()->setupFullAxesBox();
     ui->discharge->yAxis->setRange(-1, 301);
 
-    // make left and bottom axes transfer their ranges to right and top axes:
     connect(ui->discharge->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->discharge->xAxis2, SLOT(setRange(QCPRange)));
     connect(ui->discharge->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->discharge->yAxis2, SLOT(setRange(QCPRange)));
 
     connect(&dataTimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot3()));
-    dataTimer.start(0); // Interval 0 means to refresh as fast as possible
+    dataTimer.start(0);
 }
 
 void MainWindow::batteryChargeChart(){
@@ -117,12 +113,11 @@ void MainWindow::batteryChargeChart(){
     ui->charge->axisRect()->setupFullAxesBox();
     ui->charge->yAxis->setRange(-0.01, 1.01);
 
-    // make left and bottom axes transfer their ranges to right and top axes:
     connect(ui->charge->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->charge->xAxis2, SLOT(setRange(QCPRange)));
     connect(ui->charge->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->charge->yAxis2, SLOT(setRange(QCPRange)));
 
     connect(&dataTimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot4()));
-    dataTimer.start(0); // Interval 0 means to refresh as fast as possible
+    dataTimer.start(0);
 }
 
 void MainWindow::realtimeDataSlot(){
@@ -130,86 +125,60 @@ void MainWindow::realtimeDataSlot(){
     int n = cpu.getNumberOfCPU();
 
     static QTime time(QTime::currentTime());
-    // calculate two new data points:
-    double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
-    static double lastPointKey = 0;
-    if (key-lastPointKey > 0.005) // at most add point every 2 ms
-    {
-      //cpu.getUsage();
-      QVector<double> usagePerCPU = cpu.getUsage();
-      while(i < n){
-          ui->cpuHistory->graph(i)->addData(key, usagePerCPU[i]/100);
-          i++;
-      }
-      // add data to lines:
-      // ui->widget->graph(0)->addData(key, qSin(key)+qrand()/(double)RAND_MAX*1*qSin(key/0.3843));
-      // ui->widget->graph(1)->addData(key, qCos(key)+qrand()/(double)RAND_MAX*0.5*qSin(key/0.4364));
-      // rescale value (vertical) axis to fit the current data:
-      //ui->widget->graph(0)->rescaleValueAxis();
-      //ui->widget->graph(1)->rescaleValueAxis(true);
-      lastPointKey = key;
+    double key = time.elapsed()/1000.0;
+
+    QVector<double> usagePerCPU = cpu.getUsage();
+    while(i < n){
+        ui->cpuHistory->graph(i)->addData(key, usagePerCPU[i]/100);
+        i++;
     }
-    // make key axis range scroll with the data (at a constant range size of 8):
-    ui->cpuHistory->xAxis->setRange(key, 8, Qt::AlignRight);
+
+    ui->cpuHistory->xAxis->setRange(key, 60, Qt::AlignRight);
     ui->cpuHistory->replot();
 }
 
 void MainWindow::realtimeDataSlot2(){
 
     static QTime time(QTime::currentTime());
-    // calculate two new data points:
-    double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
-    static double lastPointKey = 0;
-    if (key-lastPointKey > 0.002) // at most add point every 2 ms
-    {
-      lastPointKey = key;
+    double key = time.elapsed()/1000.0;
 
-      memory.readMemory();
+    memory.readMemory();
 
-      double t = memory.getTotalMemory();
-      double u = memory.getUsedMemory();
-      double ram;
-      if (t == 0 && u == 0){
-          ram = 0;
-      }else{
-          ram = u/t;
-      }
-
-      double ts = memory.getTotalSwap();
-      double us = memory.getUsedSwap();
-      double swap;
-      if (ts == 0 && us == 0){
-          swap = 0;
-      }else{
-          swap = us/ts;
-      }
-
-      ui->memoryHistory->graph(0)->addData(key, ram);
-      ui->memoryHistory->graph(1)->addData(key, swap);
-
+    double t = memory.getTotalMemory();
+    double u = memory.getUsedMemory();
+    double ram;
+    if (t == 0 && u == 0){
+        ram = 0;
+    }else{
+        ram = u/t;
     }
-    // make key axis range scroll with the data (at a constant range size of 8):
-    ui->memoryHistory->xAxis->setRange(key, 8, Qt::AlignRight);
+
+    double ts = memory.getTotalSwap();
+    double us = memory.getUsedSwap();
+    double swap;
+    if (ts == 0 && us == 0){
+        swap = 0;
+    }else{
+        swap = us/ts;
+    }
+
+    ui->memoryHistory->graph(0)->addData(key, ram);
+    ui->memoryHistory->graph(1)->addData(key, swap);
+
+    ui->memoryHistory->xAxis->setRange(key, 60, Qt::AlignRight);
     ui->memoryHistory->replot();
 }
 
 void MainWindow::realtimeDataSlot3(){
 
     static QTime time(QTime::currentTime());
-    // calculate two new data points:
-    double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
-    static double lastPointKey = 0;
-    if (key-lastPointKey > 0.002) // at most add point every 2 ms
-    {
+    double key = time.elapsed()/1000.0;
 
-      battery.readBattery();
+    battery.readBattery();
 
-      ui->discharge->graph(0)->addData(key, battery.getDischarge());
+    ui->discharge->graph(0)->addData(key, battery.getDischarge());
 
-      lastPointKey = key;
-    }
-    // make key axis range scroll with the data (at a constant range size of 8):
-    ui->discharge->xAxis->setRange(key, 8, Qt::AlignRight);
+    ui->discharge->xAxis->setRange(key, 60, Qt::AlignRight);
     ui->discharge->replot();
 }
 
@@ -217,17 +186,11 @@ void MainWindow::realtimeDataSlot4(){
 
     static QTime time(QTime::currentTime());
     double key = time.elapsed()/1000.0;
-    static double lastPointKey = 0;
-    if (key-lastPointKey > 0.002)
-    {
 
-      battery.readBattery();
+    battery.readBattery();
 
-      ui->charge->graph(0)->addData(key, battery.getCharge());
-      std::cout << (battery.getCharge()) << std::endl;
+    ui->charge->graph(0)->addData(key, battery.getCharge());
 
-      lastPointKey = key;
-    }
-    ui->charge->xAxis->setRange(key, 8, Qt::AlignRight);
+    ui->charge->xAxis->setRange(key, 60, Qt::AlignRight);
     ui->charge->replot();
 }
