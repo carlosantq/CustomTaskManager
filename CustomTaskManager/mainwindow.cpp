@@ -82,13 +82,13 @@ void MainWindow::batteryDischargeChart(){
     ui->discharge->addGraph();
 
     ui->discharge->graph(0)->setPen(QColor(255, 110, 40));
-    ui->discharge->graph(0)->setName("Tempo de Descarga");
+    ui->discharge->graph(0)->setName("Tempo de Descarga (min)");
 
     QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
     timeTicker->setTimeFormat("%h:%m:%s");
     ui->discharge->xAxis->setTicker(timeTicker);
     ui->discharge->axisRect()->setupFullAxesBox();
-    ui->discharge->yAxis->setRange(0, 60);
+    ui->discharge->yAxis->setRange(0, 300);
 
     // make left and bottom axes transfer their ranges to right and top axes:
     connect(ui->discharge->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->discharge->xAxis2, SLOT(setRange(QCPRange)));
