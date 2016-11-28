@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>714</width>
-    <height>544</height>
+    <width>739</width>
+    <height>535</height>
    </rect>
   </property>
   <property name="acceptDrops">
@@ -23,7 +23,7 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="processos">
          <attribute name="title">
@@ -31,74 +31,74 @@
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_3">
-            <item alignment="Qt::AlignHCenter">
-             <widget class="QLabel" name="label">
-              <property name="font">
-               <font>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>Finalizar Processo</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_2">
-              <item>
-               <widget class="QLabel" name="label_2">
-                <property name="text">
-                 <string>PID</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPlainTextEdit" name="plainTextEdit"/>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton">
-              <property name="text">
-               <string>Kill</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton_2">
-              <property name="text">
-               <string>Atualizar</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="comboBox">
-              <item>
-               <property name="text">
-                <string>Filtro por Memória</string>
+           <widget class="QWidget" name="widget_2" native="true">
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
+               <item>
+                <widget class="QLineEdit" name="strPid"/>
+               </item>
+               <item>
+                <widget class="QPushButton" name="killButton">
+                 <property name="text">
+                  <string>Kill</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_7">
+               <item>
+                <widget class="QComboBox" name="processDisplay">
+                 <property name="maximumSize">
+                  <size>
+                   <width>162</width>
+                   <height>27</height>
+                  </size>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>Display by CPU usage</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Display by number of threads</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Display by RAM</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Display by Gourmet schedule</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_3">
+               <property name="sizeConstraint">
+                <enum>QLayout::SetMinimumSize</enum>
                </property>
-              </item>
-             </widget>
-            </item>
-            <item>
-             <spacer name="verticalSpacer">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>400</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QCustomPlot" name="widget_2" native="true"/>
+               <item>
+                <widget class="QWebView" name="myWebView" native="true">
+                 <property name="url" stdset="0">
+                  <url>
+                   <string>file:///home/murilao/Documents/SO/cpps/u2/ProjetoVersaoFinal/build-CustomTaskManager-Desktop_Qt_5_3_GCC_64bit-Debug/index2.html</string>
+                  </url>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -166,14 +166,19 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>714</width>
-     <height>22</height>
+     <width>739</width>
+     <height>20</height>
     </rect>
    </property>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
+  <customwidget>
+   <class>QWebView</class>
+   <extends>QWidget</extends>
+   <header>qwebview.h</header>
+  </customwidget>
   <customwidget>
    <class>QCustomPlot</class>
    <extends>QWidget</extends>

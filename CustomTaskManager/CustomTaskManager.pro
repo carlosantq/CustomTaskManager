@@ -5,6 +5,9 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += webkitwidgets
+
+CONFIG += c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
@@ -17,12 +20,17 @@ SOURCES += main.cpp\
     qcustomplot.cpp \
     cpuhandler.cpp \
     memoryhandler.cpp \
-    batteryhandler.cpp
+    batteryhandler.cpp \
+    process.cpp \
+    processhandler.cpp
 
 HEADERS  += mainwindow.h \
     qcustomplot.h \
     cpuhandler.h \
     memoryhandler.h \
-    batteryhandler.h
+    batteryhandler.h \
+    process.h \
+    operationtype.h \
+    processhandler.h
 
 FORMS    += mainwindow.ui

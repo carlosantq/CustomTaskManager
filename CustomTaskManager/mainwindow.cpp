@@ -6,10 +6,24 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     resourcesChart();
     memoryChart();
     batteryDischargeChart();
     batteryChargeChart();
+}
+
+void MainWindow::start(){
+    if(firstTime){
+        cpuThread = std::thread(&MainWindow::realtimeDataSlot, this);
+        memThread = std::thread(&MainWindow::realtimeDataSlot2, this);
+        chargeThread = std::thread(&MainWindow::realtimeDataSlot3, this);
+        dischargeThread = std::thread(&MainWindow::realtimeDataSlot4, this);
+    }
+}
+
+void MainWindow::run(){
+
 }
 
 MainWindow::~MainWindow()
@@ -193,4 +207,41 @@ void MainWindow::realtimeDataSlot4(){
 
     ui->charge->xAxis->setRange(key, 60, Qt::AlignRight);
     ui->charge->replot();
+}
+
+void MainWindow::on_killButton_clicked(){
+    if (ui->strPid->text() != NULL && ui->strPid->text().toInt() >= 0) {
+        int pid = ui->strPid->text().toInt();
+        kill(pid, SIGKILL);
+        this->refreshHTML();
+    }
+}
+
+void MainWindow::refreshHTML(){
+    int desiredOption = ui->processDisplay->currentIndex();
+    ProcessHandler processHandler;
+
+    switch (desiredOption){
+    case 0:
+        processHandler.generateJson(CPU);
+        break;
+    case 1:
+        processHandler.generateJson(THREAD);
+        break;
+    case 2:
+        processHandler.generateJson(MEM);
+        break;
+    case 3:
+        processHandler.generateJson(GOURMET);
+        break;
+    default:
+        processHandler.generateJson(CPU);
+        break;
+    }
+
+    ui->myWebView->reload();
+}
+
+void MainWindow::on_processDisplay_currentIndexChanged(int index){
+    this->refreshHTML();
 }

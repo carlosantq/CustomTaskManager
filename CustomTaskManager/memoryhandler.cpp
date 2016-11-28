@@ -26,9 +26,9 @@ int MemoryHandler::getTotalSwap(){
 
 void MemoryHandler::readMemory(){
     //ATTENTION: uncomment this and put your build directory/mem.txt after the >
-    system("free -m > /home/carlos/Downloads/CustomTaskManager/CustomTaskManager/mem.txt");
+    system("free -m > /home/murilao/Documents/SO/cpps/u2/ProjetoVersaoFinal/CustomTaskManager/mem.txt");
     //ATTENTION: change to your build directory
-    std::ifstream memoryFile("/home/carlos/Downloads/CustomTaskManager/CustomTaskManager/mem.txt");
+    std::ifstream memoryFile("/home/murilao/Documents/SO/cpps/u2/ProjetoVersaoFinal/CustomTaskManager/mem.txt");
     std::string memoryInfo;
 
     if (memoryFile.is_open() == true){
