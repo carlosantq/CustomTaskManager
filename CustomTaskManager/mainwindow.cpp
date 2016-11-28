@@ -6,7 +6,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    //firstTime = true;
+    //start();
     resourcesChart();
     memoryChart();
     batteryDischargeChart();
@@ -20,6 +21,8 @@ void MainWindow::start(){
         chargeThread = std::thread(&MainWindow::realtimeDataSlot3, this);
         dischargeThread = std::thread(&MainWindow::realtimeDataSlot4, this);
     }
+
+    firstTime = false;
 }
 
 void MainWindow::run(){
@@ -140,11 +143,15 @@ void MainWindow::realtimeDataSlot(){
 
     static QTime time(QTime::currentTime());
     double key = time.elapsed()/1000.0;
+    static double lastPointKey = 0;
 
-    QVector<double> usagePerCPU = cpu.getUsage();
-    while(i < n){
-        ui->cpuHistory->graph(i)->addData(key, usagePerCPU[i]/100);
-        i++;
+    if(key-lastPointKey > 0.5){
+        QVector<double> usagePerCPU = cpu.getUsage();
+        while(i < n){
+            ui->cpuHistory->graph(i)->addData(key, usagePerCPU[i]/100);
+            i++;
+        }
+        lastPointKey = key;
     }
 
     ui->cpuHistory->xAxis->setRange(key, 60, Qt::AlignRight);

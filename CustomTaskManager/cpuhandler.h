@@ -11,6 +11,7 @@
 #include <fstream>
 #include <QVector>
 #include <QStringList>
+#include <unistd.h>
 
 class CPUHandler
 {

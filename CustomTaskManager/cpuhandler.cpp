@@ -137,10 +137,17 @@ QVector<double> CPUHandler::getUsage()
             double iowait = cpuValues.at(5).toDouble();
             double softirq = cpuValues.at(7).toDouble();
 
+            //qDebug() << "cpuValues: " << cpuValues;
+
+            //25957
+
             this->currentUsage[i] = user + nice + system + softirq;
             this->currentUsage[i+n] = user + nice + system + softirq + idle + iowait;
 
+            //usleep(50000);
+
             this->totalUsage[i] = (100*(this->currentUsage[i]-this->previousUsage[i]) / (this->currentUsage[i+n]-this->previousUsage[i+n]));
+            qDebug() << i << ": " << totalUsage[i];
 
             this->previousUsage[i] = this->currentUsage[i];
             this->previousUsage[i+n] = this->currentUsage[i+n];

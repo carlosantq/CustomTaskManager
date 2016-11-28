@@ -33,56 +33,56 @@ vector<Process> ProcessHandler::generateData(){
     system("sed '$d' saida.data > temp.txt && cat temp.txt > saida.data && rm temp.txt");
     system("rm *.txt");
 
-    vector<vector<string>> listProcess = parseProcessFile("saida.data");
-    vector<Process> processos;
+    vector<vector<string>> rawProcess = parseProcessFile("saida.data");
+    vector<Process> processes;
 
-    for(int i = 0; i < listProcess.size(); i++){
-        vector<string> process = listProcess[i];
+    for(int i = 0; i < rawProcess.size(); i++){
+        vector<string> process = rawProcess[i];
         if(process.size() == 7){
             if(process[0] != process[4]){
                 // ERROR. Ignore it.
             }else{
                 std::string::size_type sz;
-                processos.push_back(Process(stoi(process[0], &sz), process[5], stod(process[1], &sz), stod(process[2], &sz), stoi(process[3], &sz), stoi(process[6], &sz)));
+                processes.push_back(Process(stoi(process[0], &sz), process[5], stod(process[1], &sz), stod(process[2], &sz), stoi(process[3], &sz), stoi(process[6], &sz)));
             }
         }else{
             // ERROR. Ignore it.
         }
     }
 
-    for(int i = 0; i < processos.size(); i++){
-        for(int j = i; j < processos.size(); j++){
-            if(processos[i].getId() == processos[j].getPpid()){
-                processos[i].addChidren(processos[j]);
+    for(int i = 0; i < processes.size(); i++){
+        for(int j = i; j < processes.size(); j++){
+            if(processes[i].getId() == processes[j].getPpid()){
+                processes[i].addChidren(processes[j]);
             }
         }
     }
 
-    return processos;
+    return processes;
 }
 
 void ProcessHandler::generateJson(OperationType operationtype){
-    vector<Process> processos = generateData();
+    vector<Process> processes = generateData();
 
-    string init =  "{\n ";
-           init += " \"name\": \"processos\", \n";
-           init += " \"children\": \n";
-           init += " [\n";
+    string header =  "{\n ";
+           header += " \"name\": \"processes\", \n";
+           header += " \"children\": \n";
+           header += " [\n";
 
-    string end = " ]\n}";
+    string jsonClose = " ]\n}";
 
-    string mid = "";
+    string content = "";
 
-    for(int i = 0; i < processos.size(); i++){
-        Process p = processos[i];
+    for(int i = 0; i < processes.size(); i++){
+        Process p = processes[i];
 
-        if(i == processos.size()-1)
-            mid+=p.getJson(operationtype)+"\n";
+        if(i == processes.size()-1)
+            content+=p.getJson(operationtype)+"\n";
         else
-            mid+=p.getJson(operationtype)+",\n";
+            content+=p.getJson(operationtype)+",\n";
     }
 
-    string jsonCompleto = init + mid + end;
+    string jsonCompleto = header + content + jsonClose;
 
     ofstream out;
     out.open("processes.json");
@@ -96,7 +96,7 @@ vector<vector<string>> ProcessHandler::parseProcessFile(string path){
     char c = ifPid.get();
     string ids = "";
 
-    vector<vector<string>> listProcess;
+    vector<vector<string>> rawProcess;
 
     while (ifPid.good()) {
         if(c=='\n'){
@@ -107,7 +107,7 @@ vector<vector<string>> ProcessHandler::parseProcessFile(string path){
                 processData.push_back(item);
             }
 
-            listProcess.push_back(processData);
+            rawProcess.push_back(processData);
             ids = "";
         }else{
             ids = ids + c;
@@ -115,5 +115,5 @@ vector<vector<string>> ProcessHandler::parseProcessFile(string path){
         c = ifPid.get();
     }
     ifPid.close();
-    return listProcess;
+    return rawProcess;
 }
