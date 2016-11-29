@@ -6,47 +6,65 @@ ProcessHandler::ProcessHandler(){
 
 }
 
-vector<Process> ProcessHandler::generateData(){
-    system("rm *.data");
-
-    system("awk -F \":\t\" '/^Pid:/ {print $2}' /proc/*/status > pid1.txt");
+// Only with awk
+void ProcessHandler::generateFirstProcessesStructure(){
+    system("awk -F \":\t\" '/^Pid:/ {print $2}' /proc/*/status > pida.txt");
     system("awk -F \":\t\" '/^Name:/ {print $2}' /proc/*/status > names.txt");
     system("awk -F \":\t\" '/^Threads:/ {print $2}' /proc/*/status > threads.txt");
-    system("paste -d '  ' pid1.txt names.txt threads.txt > temp.txt && sort -nk 1 temp.txt >> saida1.txt");
+    system("paste -d '  ' pida.txt names.txt threads.txt > temp.txt && sort -nk 1 temp.txt >> output1.txt");
+}
 
-    for(int i = 0; i < 4; i++){
-        system("sed '$d' saida1.txt > temp.txt && cat temp.txt > saida1.txt && rm temp.txt");
+void ProcessHandler::cleanArbitraryFiles(){
+    system("rm *.txt");
+}
+
+void ProcessHandler::deleteLinesOfFile(string file, int times, string location){
+    for(int i = 0; i < times; ++i){
+        string query = "sed '" + location + "d' " + file + " > tempfile.txt && cat tempfile.txt > " + file + " && rm tempfile.txt";
+        system(query.c_str());
     }
+}
 
-    system("ps -eo pid > temp.txt && tr -d ' \t' < temp.txt > pid2.txt && rm temp.txt");
+// Only with ps
+void ProcessHandler::generatePsDataAcquisition(){
+    system("ps -eo pid > temp.txt && tr -d ' \t' < temp.txt > pidb.txt && rm temp.txt");
     system("ps -eo %mem > temp.txt && tr -d ' \t' < temp.txt >  mem.txt && rm temp.txt");
     system("ps -eo %cpu > temp.txt && tr -d ' \t' < temp.txt >  cpu.txt && rm temp.txt");
     system("ps -eo ppid > temp.txt && tr -d ' \t' < temp.txt >  ppid.txt && rm temp.txt");
+}
 
-    system("paste -d '   ' pid2.txt mem.txt cpu.txt ppid.txt >> saida2.txt");
+void ProcessHandler::rmFilesWithSomeExtension(string extension){
+    string query = "rm *." + extension;
+    system(query.c_str());
+}
 
-    system("sed '1d' saida2.txt > temp.txt && cat temp.txt > saida2.txt && rm temp.txt");
-    system("sed '$d' saida2.txt > temp.txt && cat temp.txt > saida2.txt && rm temp.txt");
-    system("sed '$d' saida2.txt > temp.txt && cat temp.txt > saida2.txt && rm temp.txt");
+vector<Process> ProcessHandler::generateData(){
+    rmFilesWithSomeExtension("data");
 
-    system("paste -d ' ' saida2.txt saida1.txt >> saida.data");
-    system("sed '$d' saida.data > temp.txt && cat temp.txt > saida.data && rm temp.txt");
-    system("rm *.txt");
+    generateFirstProcessesStructure();
+    deleteLinesOfFile("output1.txt", 4, "$");
 
-    vector<vector<string>> rawProcess = parseProcessFile("saida.data");
+    generatePsDataAcquisition();
+
+    system("paste -d '   ' pidb.txt mem.txt cpu.txt ppid.txt >> output2.txt");
+    deleteLinesOfFile("output2.txt", 1, "1");
+    deleteLinesOfFile("output2.txt", 2, "$");
+
+    system("paste -d ' ' output2.txt output1.txt >> output.data");
+    deleteLinesOfFile("output2.txt", 1, "$");
+
+    rmFilesWithSomeExtension("txt");
+
+    vector<vector<string>> rawProcess = parseProcessFile("output.data");
     vector<Process> processes;
 
     for(int i = 0; i < rawProcess.size(); i++){
         vector<string> process = rawProcess[i];
         if(process.size() == 7){
-            if(process[0] != process[4]){
-                // ERROR. Ignore it.
-            }else{
+            if(process[0] == process[4]){
                 std::string::size_type sz;
                 processes.push_back(Process(stoi(process[0], &sz), process[5], stod(process[1], &sz), stod(process[2], &sz), stoi(process[3], &sz), stoi(process[6], &sz)));
             }
-        }else{
-            // ERROR. Ignore it.
         }
     }
 
@@ -54,6 +72,7 @@ vector<Process> ProcessHandler::generateData(){
         for(int j = i; j < processes.size(); j++){
             if(processes[i].getId() == processes[j].getPpid()){
                 processes[i].addChidren(processes[j]);
+                break;
             }
         }
     }
@@ -70,7 +89,6 @@ void ProcessHandler::generateJson(OperationType operationtype){
            header += " [\n";
 
     string jsonClose = " ]\n}";
-
     string content = "";
 
     for(int i = 0; i < processes.size(); i++){
@@ -92,15 +110,16 @@ void ProcessHandler::generateJson(OperationType operationtype){
 
 vector<vector<string>> ProcessHandler::parseProcessFile(string path){
 
+    vector<vector<string>> rawProcess;
     ifstream ifPid (path, ifstream::in);
     char c = ifPid.get();
-    string ids = "";
-
-    vector<vector<string>> rawProcess;
+    string aux = "";
 
     while (ifPid.good()) {
-        if(c=='\n'){
-            stringstream ss(ids);
+        if(c!='\n'){
+            aux = aux + c;
+        } else {
+            stringstream ss(aux);
             string item;
             vector<string> processData;
             while (getline(ss, item, ' ')) {
@@ -108,10 +127,9 @@ vector<vector<string>> ProcessHandler::parseProcessFile(string path){
             }
 
             rawProcess.push_back(processData);
-            ids = "";
-        }else{
-            ids = ids + c;
+            aux = "";
         }
+
         c = ifPid.get();
     }
     ifPid.close();

@@ -5,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <string>
 
 #include "process.h"
 #include "operationtype.h"
@@ -16,6 +17,13 @@ class ProcessHandler{
 private:
     vector< vector<string> > parseProcessFile(string path);
     vector<Process> generateData();
+
+    void generateFirstProcessesStructure();
+    void cleanArbitraryFiles();
+    void deleteLinesOfFile(string file, int times, string location);
+    //void generateJson(OperationType operationtype);
+    void generatePsDataAcquisition();
+    void rmFilesWithSomeExtension(string extension);
 
 public:
 

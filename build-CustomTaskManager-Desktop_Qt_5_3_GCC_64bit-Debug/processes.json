@@ -1,0 +1,1269 @@
+{
+  "name": "processes", 
+ "children": 
+ [
+  {
+    "name": "init",
+    "children":
+    [
+      {"name": "upstart-udev-br", "size": 10, "pid": 338}
+    ]
+  },
+  {
+    "name": "kthreadd",
+    "children":
+    [
+      {"name": "ksoftirqd/0", "size": 10, "pid": 3}
+    ]
+  },
+  {
+    "name": "ksoftirqd/0",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/0:0",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/0:0H",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/u16:0",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "rcu_sched",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "rcu_bh",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "migration/0",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "watchdog/0",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "watchdog/1",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "migration/1",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "ksoftirqd/1",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/1:0",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/1:0H",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kdevtmpfs",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "netns",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "perf",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "khungtaskd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "writeback",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "ksmd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "khugepaged",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "crypto",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kintegrityd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kblockd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "ata_sff",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "md",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "devfreq_wq",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/u16:1",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/0:1",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/1:1",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kswapd0",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "vmstat",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "fsnotify_mark",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "ecryptfs-kthrea",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kthrotld",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "acpi_thermal_pm",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/u16:2",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/1:2",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "ipv6_addrconf",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "deferwq",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "charger_manager",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "scsi_eh_0",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kpsmoused",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "scsi_tmf_0",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "scsi_eh_1",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "scsi_tmf_1",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "scsi_eh_2",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "scsi_tmf_2",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "scsi_eh_3",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "scsi_tmf_3",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "scsi_eh_4",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/0:2",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "scsi_tmf_4",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "scsi_eh_5",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "scsi_tmf_5",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/u16:3",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/u16:4",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/u16:5",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/u16:6",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/u16:7",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/u16:8",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/1:3",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/0:3",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bioset",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "jbd2/sda1-8",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "ext4-rsv-conver",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/1:1H",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kworker/0:1H",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "upstart-udev-br",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "systemd-udevd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "cfg80211",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kmemstick",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "rtsx_usb_ms_1",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "upstart-socket-",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "smbd",
+    "children":
+    [
+      {"name": "smbd", "size": 10, "pid": 873}
+    ]
+  },
+  {
+    "name": "dbus-daemon",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "ModemManager",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "upstart-file-br",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "avahi-daemon",
+    "children":
+    [
+      {"name": "avahi-daemon", "size": 10, "pid": 797}
+    ]
+  },
+  {
+    "name": "avahi-daemon",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bluetoothd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "rsyslogd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "systemd-logind",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "krfcommd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "NetworkManager",
+    "children":
+    [
+      {"name": "dhclient", "size": 10, "pid": 1218}
+    ]
+  },
+  {
+    "name": "polkitd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "smbd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "smbd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "getty",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "getty",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "thermald",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "getty",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "getty",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "getty",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "wpa_supplicant",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "sshd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "irqbalance",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "acpid",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "whoopsie",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "cron",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "cups-browsed",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "and",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kerneloops",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "mysqld",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "apache2",
+    "children":
+    [
+      {"name": "apache2", "size": 10, "pid": 1254}
+    ]
+  },
+  {
+    "name": "dhclient",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "apache2",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "apache2",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "apache2",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "apache2",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "apache2",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "dnsmasq",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "getty",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "winbindd",
+    "children":
+    [
+      {"name": "winbindd", "size": 10, "pid": 1460}
+    ]
+  },
+  {
+    "name": "nmbd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "winbindd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "lightdm",
+    "children":
+    [
+      {"name": "Xorg", "size": 90, "pid": 1543}
+    ]
+  },
+  {
+    "name": "Xorg",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "accounts-daemon",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "teamviewerd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "kauditd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "lightdm",
+    "children":
+    [
+      {"name": "gnome-session", "size": 40, "pid": 1837}
+    ]
+  },
+  {
+    "name": "cupsd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "colord",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "gnome-keyring-d",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "gnome-session",
+    "children":
+    [
+      {"name": "ssh-agent", "size": 10, "pid": 1912}
+    ]
+  },
+  {
+    "name": "ssh-agent",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "dbus-launch",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "dbus-daemon",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "ibus-daemon",
+    "children":
+    [
+      {"name": "ibus-dconf", "size": 10, "pid": 1953}
+    ]
+  },
+  {
+    "name": "gvfsd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "gvfsd-fuse",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "ibus-dconf",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "ibus-x11",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "at-spi-bus-laun",
+    "children":
+    [
+      {"name": "dbus-daemon", "size": 10, "pid": 1961}
+    ]
+  },
+  {
+    "name": "dbus-daemon",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "at-spi2-registr",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "gnome-settings-",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "pulseaudio",
+    "children":
+    [
+      {"name": "gconf-helper", "size": 10, "pid": 2058}
+    ]
+  },
+  {
+    "name": "rtkit-daemon",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "upowerd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "dconf-service",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "gsd-printer",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "gconf-helper",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "gconfd-2",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "gala",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "systemd-localed",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "ibus-engine-sim",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "cerbere",
+    "children":
+    [
+      {"name": "wingpanel", "size": 40, "pid": 2130}
+    ]
+  },
+  {
+    "name": "nm-applet",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "indicator-appli",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "indicator-datet",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "indicator-bluet",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "indicator-messa",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "indicator-power",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "light-locker",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "polkit-gnome-au",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "indicator-sessi",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "indicator-sound",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "wingpanel",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "plank",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "slingshot-launc",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "bamfdaemon",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "evolution-sourc",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "indicator-keybo",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "zeitgeist-daemo",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "zeitgeist-fts",
+    "children":
+    [
+      {"name": "cat", "size": 10, "pid": 2200}
+    ]
+  },
+  {
+    "name": "zeitgeist-datah",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "evolution-calen",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "cat",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "gvfs-udisks2-vo",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "udisksd",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "gvfs-afc-volume",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "gvfs-mtp-volume",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "gvfs-gphoto2-vo",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "firefox",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "qtcreator",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "applet.py",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "scp-dbus-servic",
+    "children":
+    [
+    ]
+  },
+  {
+    "name": "update-notifier",
+    "children":
+    [
+    ]
+  }
+ ]
+}

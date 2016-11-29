@@ -17,14 +17,14 @@ private:
     int ppid;
     int threads;
 
-    vector<Process> childrens;
+    vector<Process> children;
 
 public:
     Process();
     Process(int id, string name, double mem, double cpu, int ppid, int threads);
 
     void addChidren(Process);
-    vector<Process> getChildrens();
+    vector<Process> getChildren();
     int getNumChidrens();
 
     string getJson(OperationType operationtype);

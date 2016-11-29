@@ -65,15 +65,15 @@ int Process::getThreads(){
 }
 
 void Process::addChidren(Process processChildren){
-    this->childrens.push_back(processChildren);
+    this->children.push_back(processChildren);
 }
 
-vector<Process> Process::getChildrens(){
-    return this->childrens;
+vector<Process> Process::getChildren(){
+    return this->children;
 }
 
 int Process::getNumChidrens(){
-    return this->childrens.size();
+    return this->children.size();
 }
 
 string Process::getJson(OperationType operationtype){
@@ -81,8 +81,8 @@ string Process::getJson(OperationType operationtype){
     json += "    \"name\": \""+this->getName()+"\",\n";
     json += "    \"children\":\n";
     json += "    [\n";
-    for(int i = 0; i < this->getChildrens().size(); i++){
-        Process p = this->getChildrens()[i];
+    for(int i = 0; i < this->getChildren().size(); i++){
+        Process p = this->getChildren()[i];
 
         string text;
         switch (operationtype) {
@@ -103,11 +103,12 @@ string Process::getJson(OperationType operationtype){
             break;
         }
 
-        if(i == this->getChildrens().size()-1)
+        if(i == this->getChildren().size()-1)
             json+= "      {\"name\": \""+p.getName()+"\", \"size\": "+text+", \"pid\": "+to_string(p.getId())+"}\n";
         else
             json+= "      {\"name\": \""+p.getName()+"\", \"size\": "+text+", \"pid\": "+to_string(p.getId())+"},\n";
     }
+
     json += "    ]\n";
     json +="  }";
 
